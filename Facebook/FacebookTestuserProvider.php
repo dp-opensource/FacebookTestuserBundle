@@ -1,6 +1,6 @@
 <?php
 
-namespace linodp\FacebookTestuserBundle\Facebook;
+namespace digitalpioneers\FacebookTestuserBundle\Facebook;
 
 class FacebookTestuserProvider
 {

@@ -1,9 +1,9 @@
 {
-    "name": "linodp/FacebookTestuserBundle",
+    "name": "digitalpioneers/FacebookTestuserBundle",
     "type": "symfony-bundle",
     "description": "Provides Facebook Test Users",
     "keywords": ["test", "bundle"],
-    "homepage": "http://github.com/lino-dp/FacebookTestuserBundle",
+    "homepage": "http://github.com/digitalpioneers/FacebookTestuserBundle",
     "license": "MIT",
     "authors": [
         {
@@ -17,8 +17,8 @@
         "facebook/php-sdk": "dev-master"
     },
     "autoload": {
-        "psr-0": { "linodp\\FacebookTestuserBundle": "Facebook/" }
+        "psr-0": { "digitalpioneers\\FacebookTestuserBundle": "Facebook/" }
     },
     "minimum-stability": "dev",
-    "target-dir": "linodp/FacebookTestuserBundle"
+    "target-dir": "digitalpioneers/FacebookTestuserBundle"
 }

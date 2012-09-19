@@ -1,8 +1,8 @@
 <?php
 
-namespace linodp\FacebookTestuserBundle;
+namespace digitalpioneers\FacebookTestuserBundle;
 
-use \linodp\FacebookTestuserBundle\Facebook\FacebookTestuserProvider;
+use \digitalpioneers\FacebookTestuserBundle\Facebook\FacebookTestuserProvider;
 
 class Tests extends \PHPUnit_Framework_TestCase
 {

@@ -12,4 +12,4 @@ script: phpunit --debug
 
 notifications:
   email:
-    - lhelms@gmail.com
+    - lhelms@digitalpioneers.de
