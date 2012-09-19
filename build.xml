@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="facebooktestuserbundle" default="beforescripts">
+
+    <target name="beforescripts">
+
+        <exec executable="wget" dir=".">
+            <arg value="http://getcomposer.org/installer" />
+        </exec>
+
+        <exec executable="php" dir=".">
+            <arg value="installer" />
+        </exec>
+
+        <exec executable="php" dir=".">
+            <arg value="composer.phar" />
+            <arg value="--dev"/>
+            <arg value="install"/>
+        </exec>
+    </target>
+
+</project>

@@ -1,0 +1,24 @@
+{
+    "name": "linodp/FacebookTestuserBundle",
+    "type": "symfony-bundle",
+    "description": "Provides Facebook Test Users",
+    "keywords": ["test", "bundle"],
+    "homepage": "http://github.com/lino-dp/FacebookTestuserBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lino Helms",
+            "email": "lhelms@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/symfony": "2.1.*",
+        "facebook/php-sdk": "dev-master"
+    },
+    "autoload": {
+        "psr-0": { "linodp\\FacebookTestuserBundle": "Facebook/" }
+    },
+    "minimum-stability": "dev",
+    "target-dir": "linodp/FacebookTestuserBundle"
+}
