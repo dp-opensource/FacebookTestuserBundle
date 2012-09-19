@@ -11,6 +11,9 @@ class Tests extends \PHPUnit_Framework_TestCase
         $this->markTestIncomplete('Test is included (Ohai Travis)');
     }
 
+    /**
+     * Tests the creation of a Facebook test user against a mock
+     */
     public function testAddUser()
     {
         $responseObject = new \StdClass();
@@ -33,8 +36,21 @@ class Tests extends \PHPUnit_Framework_TestCase
         $this->assertEquals(json_encode($responseObject), json_encode($response));
     }
 
+    /**
+     * Tests removing a Facebook test user against a mock
+     */
     public function testDeleteUser()
     {
-        $this->markTestIncomplete('tbd');
+        $fbmock = $this->getMockBuilder('Faceboook')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $fbmock->expects($this->once())->method('api')->with('abcdetestuser', 'DELETE')->will($this->returnValue('true'));
+
+        $provider = new FacebookTestuserProvider($fbmock);
+
+        $response = $provider->deleteTestUser('abcdetestuser');
+
+        $this->assertEquals($response, 'true');
     }
 }
