@@ -1,20 +1,24 @@
 <?php
 
-namespace digitalpioneers\FacebookTestuserBundle;
+namespace digitalpioneers\FacebookTestuserBundle\Tests;
 
 use \digitalpioneers\FacebookTestuserBundle\Facebook\FacebookTestuserProvider;
+use \digitalpioneers\FacebookTestuserBundle\Facebook\FacebookTestUser;
 
 class Tests extends \PHPUnit_Framework_TestCase
 {
-    public function testDummy()
+    private $fbmock;
+
+    public function setUp()
     {
-        $this->markTestIncomplete('Test is included (Ohai Travis)');
+        $this->fbmock = $this->getMockForAbstractClass('BaseFacebook', array('355143471235589', 'cc9af49ab5681667fe197c3a41b00716'),'', false, true, true, array('api'));
     }
 
     /**
      * Tests the creation of a Facebook test user against a mock
+     * @covers FacebookTestuserProvider::addTestUser
      */
-    public function testAddUser()
+    public function testAddTestUser()
     {
         $responseObject = new \StdClass();
         $responseObject->id = "123456789";
@@ -23,13 +27,9 @@ class Tests extends \PHPUnit_Framework_TestCase
         $responseObject->email = "testuser@foobar.edu";
         $responseObject->password = "5555105";
 
-        $fbmock = $this->getMockBuilder('Facebook')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $this->fbmock->expects($this->once())->method('api')->will($this->returnValue($responseObject));
 
-        $fbmock->expects($this->once())->method('api')->will($this->returnValue(json_encode($responseObject)));
-
-        $provider = new FacebookTestuserProvider($fbmock);
+        $provider = new FacebookTestuserProvider($this->fbmock);
 
         $response = $provider->addTestUser(true, null, null, null);
 
@@ -38,19 +38,79 @@ class Tests extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests removing a Facebook test user against a mock
+     * @covers FacebookTestuserProvider::deleteTestUser
      */
-    public function testDeleteUser()
+    public function testDeleteTestUser()
     {
-        $fbmock = $this->getMockBuilder('Faceboook')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $user = new FacebookTestUser(array('id' => '12345', 'access_token' => 'abcdef', 'login_url' => 'http://www.facebook.com'));
 
-        $fbmock->expects($this->once())->method('api')->with('abcdetestuser', 'DELETE')->will($this->returnValue('true'));
+        $this->fbmock->expects($this->once())->method('api')->with('12345', 'DELETE')->will($this->returnValue('true'));
 
-        $provider = new FacebookTestuserProvider($fbmock);
+        $provider = new FacebookTestuserProvider($this->fbmock);
 
-        $response = $provider->deleteTestUser('abcdetestuser');
+        $response = $provider->deleteTestUser($user);
 
         $this->assertEquals($response, 'true');
     }
+
+    /**
+     * @covers FacebookTestuserProvider::changeTestUserName
+     */
+    public function testChangeTestUserName()
+    {
+
+        $user = new FacebookTestUser(array('id' => '12345', 'access_token' => 'abcdef', 'login_url' => 'http://www.facebook.com'));
+
+        $this->fbmock->expects($this->once())->method('api')->with('12345', 'POST')->will($this->returnValue('true'));
+
+        $provider = new FacebookTestuserProvider($this->fbmock);
+
+        $response = $provider->changeTestUserName($user, 'Elmer J. Fudd');
+
+        $this->assertEquals($response, 'true');
+    }
+
+    /**
+     * @covers FacebookTestuserProvider::changeTestUserPassword
+     */
+    public function testChangeTestUserPassword()
+    {
+
+        $user = new FacebookTestUser(array('id' => '12345', 'access_token' => 'abcdef', 'login_url' => 'http://www.facebook.com'));
+
+        $this->fbmock->expects($this->once())->method('api')->with('12345', 'POST')->will($this->returnValue('true'));
+
+        $provider = new FacebookTestuserProvider($this->fbmock);
+
+        $response = $provider->changeTestUserPassword($user, 'secret');
+
+        $this->assertEquals($response, 'true');
+    }
+
+    /**
+     * @covers FacebookTestuserProvider::getTestUsers
+     */
+    public function testGetTestUsers()
+    {
+
+        $responseObject = array();
+        $responseObject['data'] = array();
+        $responseObject['data'][0] = array();
+        $responseObject['data'][0]['id']= '12345';
+        $responseObject['data'][0]['access_token'] = 'abcdef';
+        $responseObject['data'][0]['login_url'] = 'http://facebook.com';
+
+        $responseArray = array(new FacebookTestUser(array('id' => '12345', 'access_token' => 'abcdef', 'login_url' => 'http://facebook.com')));
+
+
+        $this->fbmock->expects($this->any())->method('getAppId')->will($this->returnValue('355143471235589'));
+        $this->fbmock->expects($this->once())->method('api')->will($this->returnValue($responseObject));
+
+        $provider = new FacebookTestuserProvider($this->fbmock);
+
+        $response = $provider->getTestUsers();
+        $this->assertEquals($responseArray, $response);
+
+    }
+
 }
