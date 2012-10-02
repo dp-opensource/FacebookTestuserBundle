@@ -89,14 +89,16 @@ class FacebookTestuserProvider
             $params['permissions'] = $permissions;
         }
 
-        return $this->facebook->api($this->facebook->getAppId().'/accounts/test-users', 'POST', $params);
+
+        $response = $this->facebook->api($this->facebook->getAppId().'/accounts/test-users', 'POST', $params);
+        return new FacebookTestUser($response);
     }
 
     /**
      * Changes the test user name
      * @param FacebookTestUser $testUser
      * @param $newName
-     * @return mixed
+     * @return true or false
      */
     public function changeTestUserName(FacebookTestUser $testUser, $newName)
     {
@@ -107,7 +109,7 @@ class FacebookTestuserProvider
      * Changes the test user password
      * @param FacebookTestUser $testUser
      * @param $newPassword
-     * @return mixed
+     * @return true or false
      */
     public function changeTestUserPassword(FacebookTestUser $testUser, $newPassword)
     {
@@ -118,6 +120,7 @@ class FacebookTestuserProvider
      * Establishes a friendship between $user1 and $user2
      * @param FacebookTestUser $user1
      * @param FacebookTestUser $user2
+     * @return true or false
      */
     public function addUserFriendship(FacebookTestUser $user1, FacebookTestUser $user2)
     {

@@ -26,14 +26,15 @@ class Tests extends \PHPUnit_Framework_TestCase
         $responseObject->login_url = "https://www.facebook.com/platform/test_account_login.php?user_id=100004388823587&n=NV6dedtx9oDj6WL";
         $responseObject->email = "testuser@foobar.edu";
         $responseObject->password = "5555105";
+        $expectedUserObject = new FacebookTestUser($responseObject);
 
         $this->fbmock->expects($this->once())->method('api')->will($this->returnValue($responseObject));
 
         $provider = new FacebookTestuserProvider($this->fbmock);
 
-        $response = $provider->addTestUser(true, null, null, null);
+        $response = $provider->addTestUser();
 
-        $this->assertEquals(json_encode($responseObject), json_encode($response));
+        $this->assertEquals($expectedUserObject, $response);
     }
 
     /**
