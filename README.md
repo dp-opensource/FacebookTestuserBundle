@@ -1,4 +1,4 @@
-[![Build Status](https://secure.travis-ci.org/digitalpioneers/FacebookTestuserBundle.png)](http://travis-ci.org/digitalpioneers/FacebookTestUserBundle)
+[![Build Status](https://secure.travis-ci.org/digitalpioneers/FacebookTestuserBundle.png)](http://travis-ci.org/digitalpioneers/FacebookTestuserBundle)
 
 
 FacebookTestuserBundle

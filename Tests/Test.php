@@ -16,7 +16,6 @@ class Tests extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests the creation of a Facebook test user against a mock
-     * @covers FacebookTestuserProvider::addTestUser
      */
     public function testAddTestUser()
     {
@@ -39,7 +38,6 @@ class Tests extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests removing a Facebook test user against a mock
-     * @covers FacebookTestuserProvider::deleteTestUser
      */
     public function testDeleteTestUser()
     {
@@ -55,7 +53,7 @@ class Tests extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FacebookTestuserProvider::changeTestUserName
+     * Tests a call to change the test users name
      */
     public function testChangeTestUserName()
     {
@@ -72,7 +70,7 @@ class Tests extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FacebookTestuserProvider::changeTestUserPassword
+     * Tests a call to change the test users password
      */
     public function testChangeTestUserPassword()
     {
@@ -89,7 +87,7 @@ class Tests extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers FacebookTestuserProvider::getTestUsers
+     * Tests a call to get all available test users
      */
     public function testGetTestUsers()
     {
