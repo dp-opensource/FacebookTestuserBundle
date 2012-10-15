@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="facebooktestuserbundle" default="beforescripts">
+<project name="facebooktestuserbundle" default="build">
 
-    <target name="beforescripts">
+    <target name="build"
+            depends="install-composer,install-deps,phpunit"/>
 
+
+    <target name="install-composer">
         <exec executable="bash" dir=".">
             <arg value="-c" />
             <arg value="curl -s http://getcomposer.org/installer | php" />
         </exec>
+    </target>
 
+    <target name="install-deps">
         <exec executable="php" dir=".">
             <arg value="composer.phar" />
             <arg value="--dev"/>
             <arg value="install"/>
+        </exec>
+    </target>
+
+    <target name="phpunit" description="Run unit tests with PHPUnit">
+        <exec executable="phpunit" failonerror="true">
+            <arg value="--debug" />
         </exec>
     </target>
 
