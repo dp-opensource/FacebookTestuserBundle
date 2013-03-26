@@ -16,7 +16,7 @@
         "facebook/php-sdk": "dev-master"
     },
     "autoload": {
-        "psr-0": { "digitalpioneers\\FacebookTestuserBundle": "Facebook/" }
+        "psr-0": { "digitalpioneers\\FacebookTestuserBundle": "." }
     },
     "minimum-stability": "dev",
     "target-dir": "digitalpioneers/FacebookTestuserBundle"
