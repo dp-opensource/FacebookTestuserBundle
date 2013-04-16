@@ -24,8 +24,11 @@ class FacebookTestUser
 
         if (is_array($data)) {
             $this->facebook_id = $data['id'];
-            $this->access_token = $data['access_token'];
             $this->login_url = $data['login_url'];
+
+            if (array_key_exists('access_token', $data)) {
+                $this->access_token = $data['access_token'];
+            }
 
             // password is returned one time after creating the user.
             // if the password is not saved separately, it can be changed
